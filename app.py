@@ -1,13 +1,13 @@
 import streamlit as st
 import pickle
 import string
-from nltk.corpus import stopwords
 import nltk
+from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-import sklearn
 
 ps = PorterStemmer()
-
+nltk.download('stopwords')
+nltk.download('punkt')
 
 def transform_text(text):
     text = text.lower()
@@ -41,7 +41,6 @@ st.title("SMS Spam Detector")
 input_sms = st.text_area("Enter your message in the text area below and click 'Predict' to determine if it's spam or not.")
 
 if st.button('Predict'):
-
     # 1. preprocess
     transformed_sms = transform_text(input_sms)
     # 2. vectorize
@@ -51,7 +50,6 @@ if st.button('Predict'):
     # 4. Display
     if result == 1:
         st.header("Spam")
-        st.error("This message is classified as SPAM. Please be cautious and avoid interacting with this message.It's recommended not to click on any links or provide personal information.")
-
+        st.error("This message is classified as SPAM. Please be cautious and avoid interacting with this message. It's recommended not to click on any links or provide personal information.")
     else:
-        st.header("Not Spam")
+        st.header("Not Spam")
